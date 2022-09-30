@@ -31,6 +31,8 @@ export default function Search({sdata, cb}) {
         setFoundItems(results.slice(0,2));
     } else {
       console.log("data loading:", data)
+      setFoundItems([])
+     
       
     }
 
@@ -40,7 +42,10 @@ export default function Search({sdata, cb}) {
   function handleSearch(e){
     if (e.key==="Enter") {
         console.log("search:", foundItems)
-        cb(foundItems)
+        cb([...foundItems])
+        setFoundItems([]);
+        setName("")
+        
     }
   }
   return (
