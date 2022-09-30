@@ -1,36 +1,72 @@
-import { useState } from "react"
+import React, { useState } from 'react';
 
-export default function Search ({data}){
+import './Search.css';
 
-    const [result, setResult] = useState("");
-    const [dataList, setDataList] = useState(data);
-    const [sText, setSText] = useState("");
-    const [found, setFound]=useState([])
 
-    function finddata(text){
-        return text.includes(sText)
+export default function Search({sdata, cb}) {
+
+    console.log ("Search data:", sdata)
+
+
+    // the value of the search field 
+  const [name, setName] = useState('');
+  const [data, setData] = useState([sdata]);
+
+  // the search result
+  const [foundItems, setFoundItems] = useState([]);
+
+  const filter = (e) => {
+    const keyword = e.target.value;
+    console.log("search:", keyword)
+
+    if (keyword !== '') {
+        console.log("searching data:", sdata)
+        const myarr=sdata;
+        console.log("myarr", myarr)
+        const results = sdata.filter((item) => {
+            console.log("item:", item)
+            return item.name.toLowerCase().includes(keyword.toLowerCase());
+            
+        });
+        setFoundItems(results.slice(0,2));
+    } else {
+      console.log("data loading:", data)
+      
     }
 
-    const handleSearch=(e)=>{
-        console.log(dataList)
-        console.log(e.target.value)
-        const myarr=""; 
-        for (let i=0;i<dataList.length;i++){
-            if (finddata(dataList[i])){
-                myarr.concat(dataList[i],"\n")
-            }
-            if (myarr.length===5) break;
-        }
-        if (myarr) setResult(myarr)
-        console.log(myarr)
-    }
+    setName(keyword);
+  };
 
-    return(
-        <div>
-            <input type="text" onChange={handleSearch}/>
-            <textarea rows="5" cols="30">
-                {}
-            </textarea>
-        </div>
-    )
+  function handleSearch(e){
+    if (e.key==="Enter") {
+        console.log("search:", foundItems)
+        cb(foundItems)
+    }
+  }
+  return (
+    <div className="container">
+      <input
+        type="search"
+        value={name}
+        onChange={filter}
+        onKeyUp={handleSearch}
+        className="input"
+        placeholder="Filter"
+      />
+
+      <div className="item-list">
+        {foundItems && foundItems.length > 0 ? (
+          foundItems.map((item) => (
+            <li key={item.id} className="item">
+              <span className="item-name">{item.name}</span>
+              <span> - </span>
+              <span className="item-city">{item.city}</span>
+            </li>
+          ))
+        ) : (
+          <h1></h1>
+        )}
+      </div>
+    </div>
+  );
 }
