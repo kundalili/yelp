@@ -34,3 +34,4 @@ export default function Search ({data}){
         </div>
     )
 }
+//the search input field can be a selecet componenets with options?
