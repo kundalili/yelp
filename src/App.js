@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import {Link} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import Search from './components/Search';
 
-function App() {
+
+
+export default function App() {
+
+  const [data, setData] = useState([])
+
+  console.log ("hello from Searchnewlist")
+
+  async function getData() {
+    let response;
+    try {
+      
+      response = await fetch("https://cross-yelp-ali.herokuapp.com/api/restaurants")
+
+      const data2 = await response.json()
+
+      console.log("🚀 ~ data", data2)
+      setData(data2)
+    } 
+    catch (error) {
+      console.log('ERROR:', error.message) 
+      alert('error getting data')
+    }
+  } 
+
+  useEffect(() => {
+    
+    getData()
+  
+  }, [])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Search data={data}/>
+        This Part will load data and make search
     </div>
   );
 }
 
-export default App;
