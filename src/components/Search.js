@@ -54,6 +54,7 @@ export default function Search({sdata, cb}) {
         placeholder="Filter"
       />
 
+
       <div className="item-list">
         {foundItems && foundItems.length > 0 ? (
           foundItems.map((item) => (
@@ -70,3 +71,4 @@ export default function Search({sdata, cb}) {
     </div>
   );
 }
+

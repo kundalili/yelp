@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Item from './components/pages/Item'
 import LoginPage from './components/pages/LoginPage';
+import 'leaflet/dist/leaflet.css'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
