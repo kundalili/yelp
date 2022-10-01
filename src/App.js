@@ -14,6 +14,8 @@ export default function App() {
   console.log ("log1, app started")
   setGlobalState("sdata", [])
 
+ // const sdata = useGlobalState("sdata")
+
 
   async function getData() {
     let response;
@@ -33,6 +35,12 @@ export default function App() {
       console.log("location found:", location, location.city)
       setGlobalState("location",location)
 
+      response = await fetch('https://cross-yelp-ali.herokuapp.com/api/comments')
+      const commentlist = await response.json()
+      
+      console.log("location found:", commentlist)
+      setGlobalState("comments",commentlist)
+
     } 
     catch (error) {
       console.log('ERROR:', error.message) 
@@ -51,9 +59,9 @@ export default function App() {
       {/* <Search /> */}
       <div> 
         <CardContainer/> 
-        {/* <Map />  */}
-        {/* <CardDetail /> */}
+
         <Footer />
+
       </div>    
     </div>
   );

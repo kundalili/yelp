@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 import './Search.css';
-import { useGlobalState, setGlobalState } from './state/states';
 
+import { useGlobalState, setGlobalState } from './state/states';
 
 export default function Search() {
 
     const [data] = useGlobalState("data");
-    const [location] = useGlobalState("location") 
+    const [location] = useGlobalState("location")
+    const [comments] = useGlobalState("comments")
     
-    console.log ("Data comes to Search:", data)
+    console.log ("Data comes to Search:", data, comments)
 
 
     // the value of the search field 
@@ -29,8 +30,8 @@ export default function Search() {
             return item.name.toLowerCase().includes(keyword.toLowerCase());
         });
 
-        setFoundItems(results.slice(0,2));
-    } else {
+        setFoundItems(results);
+     } else {
         setFoundItems([]);
     }
     console.log("search:",[...foundItems])
@@ -70,18 +71,19 @@ export default function Search() {
       <div className="item-list">
         {foundItems && foundItems.length > 0 
          ? (
-              foundItems.map((item) => (
+            foundItems.map((item,idx) => {if (idx<5) return (
               <li key={item.id} className="item">
                 <span className="item-name">{item.name}</span>
                 <span> - </span>
                 <span className="item-city">{item.city}</span>
               </li>
-            ))
+            )})
             ) 
           : (
               <div></div>
             )}
       </div>
+      
     </div>
   );
 }

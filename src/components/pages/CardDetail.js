@@ -7,9 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react";
 import { BsStarFill } from 'react-icons/bs'
 import { BsStar } from 'react-icons/bs'
+
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import Comments from './Comments';
 import { MapContainer, TileLayer, useMap, Popup, Marker } from 'react-leaflet'
 import { Icon } from "leaflet";
 import L from 'leaflet'
+
 
 
 export default function CardDetail() {
@@ -51,11 +55,17 @@ export default function CardDetail() {
   <div>
     <p className="comments mt-[100px] mb-[20px] bg-slate-200 h-[100px]">
     Read the comments
+
+  </p>
+  
+  <Comments id={item.id}/>
+
     </p>
   </div>
   <button className="backBtn mb-[10px]" onClick={goBack}>
       BACK
   </button>
+
   <MapContainer 
             center={[52.515, 13.39]} 
             zoom={13} 
