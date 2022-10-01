@@ -1,9 +1,22 @@
-import React from 'react'
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import React, { useState } from 'react'
+import { MapContainer, TileLayer, useMap, Popup, Marker } from 'react-leaflet'
 import L from 'leaflet'
-
+import { Icon } from "leaflet";
+import { useGlobalState } from './state/states';
 
 export default function Map() {
+
+  const [sdata, setSdata] = useGlobalState("sdata");
+  
+  const [coords, setCoords] = useState([[52.51411,13.39008], [52.51522, 13.3905]]);
+  
+
+  const iconimg = new Icon({
+    iconUrl: "https://unpkg.com/leaflet@1.9.1/dist/images/marker-icon-2x.png",
+    iconSize: [25, 25]
+  });
+
+  console.log("sdata value", sdata)
   return (
    
         <MapContainer 
@@ -14,14 +27,23 @@ export default function Map() {
             
         >
         <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-    {/* <Marker position={[52.516, 13.39]}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      {/* </Popup>
-    </Marker> */} 
+      {
+        
+        sdata.map((item, idx)=>
+            
+            <Marker key={idx} position={coords[idx]} icon= {iconimg} >
+                <Popup >
+                    {item.name} <br /> {item.city} - {item.rating}
+                </Popup>
+            </Marker>
+            
+            
+        )
+      }
+
   </MapContainer>
   
   )      
