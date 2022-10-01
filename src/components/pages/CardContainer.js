@@ -19,13 +19,9 @@ function CardContainer() {
              
           }
       
-{/* map data, link to and index.js */}
 
       </div>
-      
 
-
- 
     </div>
   )
 }
