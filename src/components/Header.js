@@ -9,7 +9,6 @@ function Header(props) {
                 <Link to='/contact'>Contact</Link>
                
             </div>
-            <Map/>
         </div>
     );
 }

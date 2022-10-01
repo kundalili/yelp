@@ -1,51 +1,51 @@
 import React, { useState } from 'react';
 
 import './Search.css';
+import { useGlobalState, setGlobalState } from './state/states';
 
 
-export default function Search({sdata, cb}) {
+export default function Search() {
 
-    console.log ("Search data:", sdata)
+    const [data] = useGlobalState("data");
+    
+    console.log ("Data comes to Search:", data)
 
 
     // the value of the search field 
   const [name, setName] = useState('');
-  const [data, setData] = useState([sdata]);
-
+  
   // the search result
   const [foundItems, setFoundItems] = useState([]);
 
   const filter = (e) => {
+    const myarr=[...data];
     const keyword = e.target.value;
     console.log("search:", keyword)
 
     if (keyword !== '') {
-        console.log("searching data:", sdata)
-        const myarr=sdata;
-        console.log("myarr", myarr)
-        const results = sdata.filter((item) => {
+          const results = myarr.filter((item) => {
             console.log("item:", item)
             return item.name.toLowerCase().includes(keyword.toLowerCase());
-            
         });
+
         setFoundItems(results.slice(0,2));
     } else {
-      console.log("data loading:", data)
-      setFoundItems([])
-     
-      
+        setFoundItems([]);
     }
-
+    console.log("search:",[...foundItems])
     setName(keyword);
   };
 
   function handleSearch(e){
     if (e.key==="Enter") {
-        console.log("search:", foundItems)
-        cb([...foundItems])
-        setFoundItems([]);
+        console.log("search result will be set global:", foundItems)
+        if (foundItems.length>0) {
+          console.log("search result:",foundItems)
+          setGlobalState("sdata", foundItems)
+          
+        };
         setName("")
-        
+        setFoundItems([]);
     }
   }
   return (
@@ -54,24 +54,26 @@ export default function Search({sdata, cb}) {
         type="search"
         value={name}
         onChange={filter}
-        onKeyUp={handleSearch}
+        onKeyDown={handleSearch}
         className="input"
         placeholder="Filter"
       />
 
 
       <div className="item-list">
-        {foundItems && foundItems.length > 0 ? (
-          foundItems.map((item) => (
-            <li key={item.id} className="item">
-              <span className="item-name">{item.name}</span>
-              <span> - </span>
-              <span className="item-city">{item.city}</span>
-            </li>
-          ))
-        ) : (
-          <h1></h1>
-        )}
+        {foundItems && foundItems.length > 0 
+         ? (
+              foundItems.map((item) => (
+              <li key={item.id} className="item">
+                <span className="item-name">{item.name}</span>
+                <span> - </span>
+                <span className="item-city">{item.city}</span>
+              </li>
+            ))
+            ) 
+          : (
+              <div></div>
+            )}
       </div>
     </div>
   );

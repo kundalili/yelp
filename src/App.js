@@ -4,27 +4,27 @@ import {useEffect, useState} from 'react'
 import Search from './components/Search';
 import CardContainer from "./components/pages/CardContainer"
 import CardDetail from "./components/pages/CardDetail"
+import Map from "./components/Map"
+import {setGlobalState, useGlobalState} from "./components/state/states"
 
 
 export default function App() {
 
-  const [data, setData] = useState()
+  console.log ("log1, app started")
+  setGlobalState("sdata", [])
 
-  const [sdata, setSdata] = useState([])
-
-  console.log ("hello from Searchnewlist")
 
   async function getData() {
     let response;
     try {
-      
+      console.log ("Log 2, after render")
       response = await fetch("https://cross-yelp-ali.herokuapp.com/api/restaurants")
 
-      console.log ("resp:",response)
+      console.log ("Log3, response:",response)
       const data2 = await response.json()
 
-      console.log("🚀 ~ data", data2)
-      setData(data2.data)
+      console.log("log 4 data from API", data2)
+      setGlobalState("data",data2.data)
     } 
     catch (error) {
       console.log('ERROR:', error.message) 
@@ -35,30 +35,15 @@ export default function App() {
   useEffect(() => {
     
     getData()
-    console.log(" API data", data)
   
   }, [])
 
-
-  function handleSearch(sdata){
-    console.log("search finish:",sdata)
-    setSdata(sdata);
-  }
-
   return (
-    <div>
-      <div>
-          {
-          data? <Search sdata={data} cb={handleSearch}/>:<div></div>
-          }
-      </div>     
-
+    <div className='flex'>
+      <Search />
       <div>  
-        { 
-        sdata.length>1?
-          <CardContainer />
-          :<CardDetail />
-        }
+        <Map /> 
+        <CardDetail />
       </div>    
     </div>
   );
