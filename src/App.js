@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react'
 import Search from './components/Search';
 import CardContainer from "./components/pages/CardContainer"
 import CardDetail from "./components/pages/CardDetail"
+import Footer from './components/pages/Footer'
 import Map from "./components/Map"
 import {setGlobalState, useGlobalState} from "./components/state/states"
 
@@ -47,11 +48,12 @@ export default function App() {
 
   return (
     <div className='flex'>
-      <Search />
+      {/* <Search /> */}
       <div> 
         <CardContainer/> 
         {/* <Map />  */}
         {/* <CardDetail /> */}
+        <Footer />
       </div>    
     </div>
   );
