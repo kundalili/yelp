@@ -16,7 +16,7 @@ function Comments({id}) {
     return (
     <div>
        {
-        myarr.map((item,idx)=><Comment item={item}/>)
+        myarr.map((item,idx)=><Comment key= {idx} item={item}/>)
        }
     </div>
   )
