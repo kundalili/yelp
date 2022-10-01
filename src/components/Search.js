@@ -7,6 +7,7 @@ import { useGlobalState, setGlobalState } from './state/states';
 export default function Search() {
 
     const [data] = useGlobalState("data");
+    const [location] = useGlobalState("location") 
     
     console.log ("Data comes to Search:", data)
 
@@ -48,8 +49,14 @@ export default function Search() {
         setFoundItems([]);
     }
   }
+  console.log("loc in search:",location)
   return (
     <div className="container">
+      {
+        Object.keys(location).length>0
+        ?<h1>{location.city}</h1>
+        : <div></div>
+      }
       <input
         type="search"
         value={name}
