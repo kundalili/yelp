@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { BsStarFill } from 'react-icons/bs'
 import { BsStar } from 'react-icons/bs'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
-import L from 'leaflet'
+import Comments from './Comments';
+
 
 
 export default function CardDetail() {
@@ -46,6 +47,8 @@ export default function CardDetail() {
   <p className="comments bg-slate-200 h-[100px]">
     Read the comments
   </p>
+  
+  <Comments id={item.id}/>
   <MapContainer 
     center={[52.515, 13.39]} 
     zoom={13} 
