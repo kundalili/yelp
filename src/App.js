@@ -25,6 +25,13 @@ export default function App() {
 
       console.log("log 4 data from API", data2)
       setGlobalState("data",data2.data)
+
+      response = await fetch('http://ip-api.com/json')
+      const location = await response.json()
+      
+      console.log("location found:", location, location.city)
+      setGlobalState("location",location)
+
     } 
     catch (error) {
       console.log('ERROR:', error.message) 
