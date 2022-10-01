@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import LoginLayout from './components/layout/LoginLayout';
 import ItemLayout from './components/layout/ItemLayout';
+import CardDetail from './components/pages/CardDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,7 +24,7 @@ root.render(
             </Route>
 
             <Route element = {<ItemLayout />}>
-                <Route path='/search/:item' element={<Item />} />
+                <Route path='/:id' element={<CardDetail />} />
             </Route>
 
             <Route element={<LoginLayout />}>
