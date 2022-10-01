@@ -52,7 +52,7 @@ export default function Search() {
   }
   console.log("loc in search:",location)
   return (
-    <div className="container flex gap-[20px] font-bold p-[20px]">
+    <div className="container flex gap-[20px] font-bold p-[20px] flex-row">
       {
         Object.keys(location).length>0
         ?<h1>{location.city}</h1>
