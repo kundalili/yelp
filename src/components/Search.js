@@ -52,7 +52,7 @@ export default function Search() {
   }
   console.log("loc in search:",location)
   return (
-    <div className="container">
+    <div className="container flex gap-[20px] font-bold p-[20px]">
       {
         Object.keys(location).length>0
         ?<h1>{location.city}</h1>
@@ -63,7 +63,7 @@ export default function Search() {
         value={name}
         onChange={filter}
         onKeyDown={handleSearch}
-        className="input"
+        className="input rounded-md placeholder-slate-300"
         placeholder="Filter"
       />
 

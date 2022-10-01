@@ -38,7 +38,7 @@
 }
 
 .restaurant {
-  background-image: url("../src/components/img/walnut-buns.jpg");
+  //background-image: url("../src/components/img/walnut-buns.jpg");
   background-position: center;
   height: 200px;
   background-size: cover;
@@ -72,6 +72,10 @@
   }
   .backBtn:focus-visible{
       outline-offset: 1px;
+  }
+
+  .header {
+    auto-fit: minmax(400px, 1fr);
   }
 
 
