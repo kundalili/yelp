@@ -24,7 +24,7 @@ export default function App() {
       const data2 = await response.json()
 
       console.log("log 4 data from API", data2)
-      setGlobalState("data",data2.data)
+      setGlobalState("data",data2)
 
       response = await fetch('http://ip-api.com/json')
       const location = await response.json()
@@ -48,9 +48,10 @@ export default function App() {
   return (
     <div className='flex'>
       <Search />
-      <div>  
-        <Map /> 
-        <CardDetail />
+      <div> 
+        <CardContainer/> 
+        {/* <Map />  */}
+        {/* <CardDetail /> */}
       </div>    
     </div>
   );
